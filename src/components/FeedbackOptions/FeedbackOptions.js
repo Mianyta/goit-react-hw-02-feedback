@@ -8,7 +8,7 @@ export class FeedbackOptions extends Component {
         {this.props.options.map((option, index) => (
           <button
             key={index}
-            onClick={this.props.onLeaveFeedback}
+            onClick={()=>this.props.onLeaveFeedback}
             type="button"
             id={option}
             className="btn btn-primary"

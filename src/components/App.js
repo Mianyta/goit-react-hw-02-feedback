@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Section } from './Section/Section';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './Statistics/Statistics';
@@ -13,31 +12,30 @@ export class App extends Component {
   };
 
   handleClick = event => {
-    const id = event.target.id;
+    const clickedId = event.target.id;
 
     this.setState(prevState => {
       return {
-        [id]: prevState[id] + 1,
+        [clickedId]: prevState[clickedId] + 1,
       };
     });
   };
 
   countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
-    let total = good + neutral + bad;
-    return total;
+    return good + neutral + bad;
   };
 
   countPositiveFeedbackPercentage = () => {
     const { good } = this.state;
-    this.countTotalFeedback();
-    let positiveFeedback = (100 * good) / this.countTotalFeedback();
-    return positiveFeedback;
+    const total = this.countTotalFeedback();
+    let positiveFeedback = total > 0 ? (100 * good) / total : 0;
+    return positiveFeedback.toFixed(2);
   };
 
   render() {
     const { good, neutral, bad } = this.state;
-    //console.log(this.state);
+
     return (
       <>
         <Section title="Please leave feedback">
